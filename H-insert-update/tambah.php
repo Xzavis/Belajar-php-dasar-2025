@@ -1,25 +1,28 @@
 <?php
 
-// koneksi
-$conn = mysqli_connect(hostname: "localhost", username: "root", password: "", database: "phpdasar");
+// 
+require 'Functions.php';
 
 // cek apakah tombol submit sudah di pencet?
 if (isset($_POST["submit"])) {
-    // ambil data dari setiap element didalam form
-    // berdasarkan key name= ""
-    var_dump($_POST);
-    $nama = $_POST["nama"];
-    $nrp = $_POST["nrp"];
-    $email = $_POST["email"];
-    $jurusan = $_POST["jurusan"];
-    $gambar = $_POST["gambar"];
-
-    // menampilkan data menggunakan query
-    $insertQuery = "INSERT INTO mahasiswa
-        VALUES 
-            (NULL, '$nama', '$nrp', '$email', '$jurusan', '$gambar') 
+    //    Cek apakah data sudah ditambahkan atau tidak
+    if(addData($_POST) > 0){
+        echo "
+        <script>
+            alert('Data Berhasil Ditambahkan');
+            document.location.href = 'index.php';
+        </script>
         ";
-    mysqli_query($conn, $insertQuery);
+    } else {
+        echo 
+        "
+        <script>
+            alert('Data Gagal Ditambahkan');
+            document.location.href = 'index.php';
+        </script>
+        ";
+    }
+
 }
 
 

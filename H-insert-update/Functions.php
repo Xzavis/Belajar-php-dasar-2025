@@ -10,8 +10,8 @@ $connect = mysqli_connect(
 
 // function query
 function query($query){
-    
-    $result = mysqli_query(mysql: $GLOBALS['connect'], query: $query);
+    global $connect;
+    $result = mysqli_query(mysql: $connect, query: $query);
     $rows = [];
     while($row = mysqli_fetch_assoc($result)) {
         $rows[] = $row;
@@ -19,20 +19,21 @@ function query($query){
     return $rows;
 }
 
-// pengecekan koneksi
+function addData($data){
+    global $connect;
+    $nama = $data["nama"];
+    $nrp = $data["nrp"];
+    $email = $data["email"];
+    $jurusan = $data["jurusan"];
+    $gambar = $data["gambar"];
 
+    // menampilkan data menggunakan query
+    // $insertQuery = "INSERT INTO mahasiswa
+    //     VALUES 
+    //         ('', '$nama', '$nrp', '$email', '$jurusan', '$gambar') 
+    //     ";
+    $query = "INSERT INTO mahasiswa VALUES (NULL,'$nama','$nrp','$email','$jurusan','$gambar')";
+    mysqli_query($connect,$query);
+    return mysqli_affected_rows($connect);
 
-// ambil data (fetch) mahasisiswa dari obejct result
-// mysqli_fetch_row() // mengembalikan array numerik
-// mysqli_fetch_assoc() // mengembalikan array associative
-// mysqli_fetch_array() // mengembalikan keduanya numerik dan associative
-// mysqli_fetch_object() // mengembalikan object
-
-
-
-// jangan lupa untuk melooping
-// while($view_database= mysqli_fetch_assoc($result)){
-//     var_dump($view_database);
-// }
-
-
+}
