@@ -38,7 +38,7 @@ $mahasiswa = query ("SELECT * FROM mahasiswa");
                 <td style="text-align: center;"><b> <?= $i ?> </b></td>
                 <td style="text-align: center;"> <?= $data["id"]?> </td>
                 <td>
-                    <a href="">Update</a>
+                    <a href="update.php?id=<?= $data['id'] ?>">Update</a>
                     |
                     <a href="delete.php?id=<?= $data['id'] ?>" onclick="return confirm('Apakah anda ingin menghapus Data ID <?= $data['id']; ?>')">Delete</a>
                 </td>
