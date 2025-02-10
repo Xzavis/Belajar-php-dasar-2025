@@ -6,7 +6,7 @@ require 'Functions.php';
 // cek apakah tombol submit sudah di pencet?
 if (isset($_POST["submit"])) {
     //    Cek apakah data sudah ditambahkan atau tidak
-    if(addData($_POST) > 0){
+    if (tambah($_POST) > 0) {
         echo "
         <script>
             alert('Data Berhasil Ditambahkan');
@@ -14,7 +14,7 @@ if (isset($_POST["submit"])) {
         </script>
         ";
     } else {
-        echo 
+        echo
         "
         <script>
             alert('Data Gagal Ditambahkan');
@@ -22,7 +22,6 @@ if (isset($_POST["submit"])) {
         </script>
         ";
     }
-
 }
 
 
@@ -40,9 +39,9 @@ if (isset($_POST["submit"])) {
 <body>
     <h1>tambah data mahasiswa</h1>
 
-    <form action="" method="POST" >
+    <form action="" method="POST" enctype="multipart/form-data">
         <ul>
-            
+
             <li>
                 <label for="nama">Nama: </label>
                 <input type="text" name="nama" id="nama">
@@ -61,7 +60,7 @@ if (isset($_POST["submit"])) {
             </li>
             <li>
                 <label for="gambar">Gambar: </label>
-                <input type="text" name="gambar" id="gambar">
+                <input type="file" name="gambar" id="gambar">
             </li>
             <li>
                 <button type="submit" name="submit">
