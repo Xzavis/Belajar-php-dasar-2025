@@ -47,8 +47,9 @@ $mhs = query("SELECT * FROM mahasiswa WHERE id = $id ")[0];
 <body>
     <h1>Update data mahasiswa</h1>
 
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $mhs["id"]?>">
+        <input type="hidden" name="gambarLama" value="<?= $mhs["gambar"]?>">
         <ul>
             <li>
                 <label for="nama">Nama: </label>
@@ -67,11 +68,12 @@ $mhs = query("SELECT * FROM mahasiswa WHERE id = $id ")[0];
                 <input type="text" name="jurusan" id="jurusan" value="<?= $mhs["jurusan"] ?>">
             </li>
             <li>
-                <label for="gambar">Gambar: </label>
-                <input type="text" name="gambar" id="gambar" value="<?= $mhs["gambar"] ?>">
+                <label for="gambar">Gambar: </label> <br>
+                <img width="50px" height="50px" src="img/<?= $mhs['gambar']?>" alt=""> <br>
+                <input type="file" name="gambar" id="gambar">
             </li>
             <li>
-                <button type="submit" name="submit">
+                <button style="margin: 1.2rem 0;" type="submit" name="submit">
                     Update Data!
                 </button>
             </li>

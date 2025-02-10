@@ -71,11 +71,16 @@ function upload()
         return false;
     };
 
-    // pengecekan lolos semua pengecekan
-    move_uploaded_file($tmpName, 'img/' . $namaFile );
-    return $namaFile;
+    // Generate nama file random untuk gambar
+    $namaFileBaru = uniqid();
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiGambar;
+    // var_dump($namaFileBaru); die;
 
-    
+    // pengecekan lolos semua pengecekan
+    move_uploaded_file($tmpName, 'img/' . $namaFileBaru );
+    return $namaFileBaru;
+
 };
 
 function hapus($id)
@@ -93,13 +98,16 @@ function ubah($data)
     $nrp = htmlspecialchars($data["nrp"]);
     $email = htmlspecialchars($data["email"]);
     $jurusan =  htmlspecialchars($data["jurusan"]);
-    $gambar = htmlspecialchars($data["gambar"]);
+    $gambarLama = htmlspecialchars($data["gambarLama"]);
+    
+    // pengecekan apakah user mengganti gambar atau tidak
+    if($_FILES ["gambar"]["error"] === 4) {
+        $gambar = $gambarLama;
+    } else {
+        $gambar = upload(); 
+    };
 
-    // menampilkan data menggunakan query
-    // $insertQuery = "INSERT INTO mahasiswa
-    //     VALUES 
-    //         ('', '$nama', '$nrp', '$email', '$jurusan', '$gambar') 
-    //     ";
+
     $query = "UPDATE mahasiswa SET 
         nama = '$nama', 
         nrp = '$nrp',
